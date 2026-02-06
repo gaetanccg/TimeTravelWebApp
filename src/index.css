@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+@theme {
+  --color-dark-bg: #0a0a0f;
+  --color-dark-surface: #1a1a2e;
+  --color-dark-text: #f0f0f0;
+  --color-gold: #D4AF37;
+  --color-gold-light: #e8c84a;
+  --color-gold-dark: #b8962e;
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+/* Base styles — must be inside @layer base so they don't override Tailwind utilities */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-dark-bg);
+    color: var(--color-dark-text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-dark-bg);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-gold-dark);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-gold);
+  }
+}
+
+/* Component classes — inside @layer components so utilities can still override them */
+@layer components {
+  .hero-gradient {
+    background: linear-gradient(
+      135deg,
+      #0a0a0f 0%,
+      #1a1a2e 25%,
+      #16213e 50%,
+      #1a1a2e 75%,
+      #0a0a0f 100%
+    );
+    background-size: 400% 400%;
+    animation: gradient-shift 15s ease infinite;
+  }
+
+  .particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--color-gold);
+    border-radius: 50%;
+    animation: float linear infinite;
+  }
+
+  .logo-glow {
+    animation: glow 3s ease-in-out infinite;
+  }
+
+  .btn-gold {
+    background: linear-gradient(90deg, var(--color-gold-dark), var(--color-gold), var(--color-gold-light), var(--color-gold), var(--color-gold-dark));
+    background-size: 200% auto;
+    color: #0a0a0f;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .btn-gold:hover {
+    animation: shimmer 2s linear infinite;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+  }
+}
+
+/* Keyframes stay outside layers (they don't participate in cascade) */
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
+}
+
+@keyframes glow {
+  0%, 100% { text-shadow: 0 0 10px rgba(212, 175, 55, 0.3), 0 0 20px rgba(212, 175, 55, 0.1); }
+  50% { text-shadow: 0 0 20px rgba(212, 175, 55, 0.6), 0 0 40px rgba(212, 175, 55, 0.3); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
