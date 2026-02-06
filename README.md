@@ -53,3 +53,7 @@ Le chatbot utilise l'API Anthropic directement côté client. L'utilisateur doit
 
 ## Contribution
 
+- CHOLLET Gaëtan
+- FAYOLLE Quentin
+- RIBES Thibault
+- FENZL Romain
